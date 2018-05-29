@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "RotateViewController.h"
 
 @interface ViewController ()
 
@@ -19,6 +20,10 @@
     // Do any additional setup after loading the view, typically from a nib.
 }
 
+- (IBAction)presentPressed:(id)sender {
+    RotateViewController *vc = [[RotateViewController alloc] init];
+    [self presentViewController:vc animated:YES completion:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

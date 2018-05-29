@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ScreenPresentingProtocol <NSObject>
+@optional
+-(BOOL)willDismiss;
+-(BOOL)willPresent;
+@end
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

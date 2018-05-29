@@ -47,5 +47,35 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark - App support orientations
+-(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
+    UIViewController *rootVC = [self topViewControllerWithRootViewController:window.rootViewController];
+    if ([rootVC conformsToProtocol:@protocol(ScreenPresentingProtocol)]) {
+        id<ScreenPresentingProtocol> vcAppliedProtocol = (id<ScreenPresentingProtocol>)rootVC;
+        if ([vcAppliedProtocol willDismiss]) {
+            return UIInterfaceOrientationMaskPortrait;
+        }
+        else if ([vcAppliedProtocol willPresent]) {
+            return UIInterfaceOrientationMaskLandscape;
+        }
+    }
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(UIViewController *)topViewControllerWithRootViewController:(UIViewController *)rootVC {
+    if (rootVC == nil) {
+        return nil;
+    }
+    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+        return [self topViewControllerWithRootViewController:[(UITabBarController *)rootVC selectedViewController]];
+    }
+    else if ([rootVC isKindOfClass:[UINavigationController class]]) {
+        return [self topViewControllerWithRootViewController:[(UINavigationController *)rootVC visibleViewController]];
+    }
+    else if (rootVC.presentedViewController != nil) {
+        return [self topViewControllerWithRootViewController:rootVC.presentedViewController];
+    }
+    return rootVC;
+}
 
 @end

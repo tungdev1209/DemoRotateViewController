@@ -15,6 +15,7 @@
 		1AAB2D2E20BCF7A100F919E4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D2D20BCF7A100F919E4 /* main.m */; };
 		1AAB2D3820BCF7A100F919E4 /* DemoRotateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D3720BCF7A100F919E4 /* DemoRotateTests.m */; };
 		1AAB2D4320BCF7A100F919E4 /* DemoRotateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D4220BCF7A100F919E4 /* DemoRotateUITests.m */; };
+		1AAB2D5220BCF7D300F919E4 /* RotateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,8 @@
 		1AAB2D3E20BCF7A100F919E4 /* DemoRotateUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DemoRotateUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AAB2D4220BCF7A100F919E4 /* DemoRotateUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoRotateUITests.m; sourceTree = "<group>"; };
 		1AAB2D4420BCF7A100F919E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1AAB2D5020BCF7D300F919E4 /* RotateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotateViewController.h; sourceTree = "<group>"; };
+		1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotateViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				1AAB2D1F20BCF79F00F919E4 /* AppDelegate.m */,
 				1AAB2D2120BCF79F00F919E4 /* ViewController.h */,
 				1AAB2D2220BCF79F00F919E4 /* ViewController.m */,
+				1AAB2D5020BCF7D300F919E4 /* RotateViewController.h */,
+				1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */,
 				1AAB2D2420BCF79F00F919E4 /* Main.storyboard */,
 				1AAB2D2720BCF7A100F919E4 /* Assets.xcassets */,
 				1AAB2D2920BCF7A100F919E4 /* LaunchScreen.storyboard */,
@@ -265,6 +270,7 @@
 				1AAB2D2320BCF79F00F919E4 /* ViewController.m in Sources */,
 				1AAB2D2E20BCF7A100F919E4 /* main.m in Sources */,
 				1AAB2D2020BCF79F00F919E4 /* AppDelegate.m in Sources */,
+				1AAB2D5220BCF7D300F919E4 /* RotateViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -433,6 +439,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TX5SE2R2WN;
 				INFOPLIST_FILE = DemoRotate/Info.plist;
@@ -442,6 +449,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fsoft.cme.DemoRotate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -450,6 +458,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = TX5SE2R2WN;
 				INFOPLIST_FILE = DemoRotate/Info.plist;
@@ -459,6 +468,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fsoft.cme.DemoRotate;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
