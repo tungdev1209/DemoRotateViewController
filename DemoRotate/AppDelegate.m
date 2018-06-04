@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Utilities.h"
 
 @interface AppDelegate ()
 
@@ -49,33 +50,17 @@
 
 #pragma mark - App support orientations
 -(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
-    UIViewController *rootVC = [self topViewControllerWithRootViewController:window.rootViewController];
+    UIViewController *rootVC = [Utilities topViewControllerWithRootViewController:window.rootViewController];
     if ([rootVC conformsToProtocol:@protocol(ScreenPresentingProtocol)]) {
         id<ScreenPresentingProtocol> vcAppliedProtocol = (id<ScreenPresentingProtocol>)rootVC;
         if ([vcAppliedProtocol willDismiss]) {
-            return UIInterfaceOrientationMaskPortrait;
+            return UIInterfaceOrientationMaskAll;
         }
         else if ([vcAppliedProtocol willPresent]) {
             return UIInterfaceOrientationMaskLandscape;
         }
     }
-    return UIInterfaceOrientationMaskPortrait;
-}
-
--(UIViewController *)topViewControllerWithRootViewController:(UIViewController *)rootVC {
-    if (rootVC == nil) {
-        return nil;
-    }
-    if ([rootVC isKindOfClass:[UITabBarController class]]) {
-        return [self topViewControllerWithRootViewController:[(UITabBarController *)rootVC selectedViewController]];
-    }
-    else if ([rootVC isKindOfClass:[UINavigationController class]]) {
-        return [self topViewControllerWithRootViewController:[(UINavigationController *)rootVC visibleViewController]];
-    }
-    else if (rootVC.presentedViewController != nil) {
-        return [self topViewControllerWithRootViewController:rootVC.presentedViewController];
-    }
-    return rootVC;
+    return UIInterfaceOrientationMaskAll;
 }
 
 @end

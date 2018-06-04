@@ -27,6 +27,7 @@
 		1AAB2D3820BCF7A100F919E4 /* DemoRotateTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D3720BCF7A100F919E4 /* DemoRotateTests.m */; };
 		1AAB2D4320BCF7A100F919E4 /* DemoRotateUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D4220BCF7A100F919E4 /* DemoRotateUITests.m */; };
 		1AAB2D5220BCF7D300F919E4 /* RotateViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */; };
+		1AAB2D6320C4F69C00F919E4 /* MinimizeAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D6220C4F69C00F919E4 /* MinimizeAnimator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,8 @@
 		1AAB2D4420BCF7A100F919E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1AAB2D5020BCF7D300F919E4 /* RotateViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RotateViewController.h; sourceTree = "<group>"; };
 		1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RotateViewController.m; sourceTree = "<group>"; };
+		1AAB2D6120C4F69C00F919E4 /* MinimizeAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MinimizeAnimator.h; sourceTree = "<group>"; };
+		1AAB2D6220C4F69C00F919E4 /* MinimizeAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MinimizeAnimator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,11 +151,11 @@
 		18D23EC620C3F1C5003B2780 /* Foundation */ = {
 			isa = PBXGroup;
 			children = (
-				18D23EC720C3F1C5003B2780 /* NSLayoutConstraint+Extension.h */,
-				18D23EC820C3F1C5003B2780 /* NSObject+Extension.h */,
 				18D23EC920C3F1C5003B2780 /* Foundation+Extension.h */,
-				18D23ECA20C3F1C5003B2780 /* NSObject+Extension.m */,
+				18D23EC720C3F1C5003B2780 /* NSLayoutConstraint+Extension.h */,
 				18D23ECB20C3F1C5003B2780 /* NSLayoutConstraint+Extension.m */,
+				18D23EC820C3F1C5003B2780 /* NSObject+Extension.h */,
+				18D23ECA20C3F1C5003B2780 /* NSObject+Extension.m */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -189,16 +192,12 @@
 		1AAB2D1D20BCF79F00F919E4 /* DemoRotate */ = {
 			isa = PBXGroup;
 			children = (
+				1AAB2D6520C4F6CB00F919E4 /* ViewController */,
+				1AAB2D6420C4F6BE00F919E4 /* Animator */,
 				18D23ED720C3FAA2003B2780 /* Utils */,
 				18D23EB720C3F1C5003B2780 /* Extensions */,
 				1AAB2D1E20BCF79F00F919E4 /* AppDelegate.h */,
 				1AAB2D1F20BCF79F00F919E4 /* AppDelegate.m */,
-				1AAB2D2120BCF79F00F919E4 /* ViewController.h */,
-				1AAB2D2220BCF79F00F919E4 /* ViewController.m */,
-				18D23ED820C3FD32003B2780 /* FullScreenAnimator.h */,
-				18D23ED920C3FD32003B2780 /* FullScreenAnimator.m */,
-				1AAB2D5020BCF7D300F919E4 /* RotateViewController.h */,
-				1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */,
 				18D23EB520C3C807003B2780 /* PlayerView.h */,
 				18D23EB420C3C807003B2780 /* PlayerView.m */,
 				1AAB2D2420BCF79F00F919E4 /* Main.storyboard */,
@@ -226,6 +225,28 @@
 				1AAB2D4420BCF7A100F919E4 /* Info.plist */,
 			);
 			path = DemoRotateUITests;
+			sourceTree = "<group>";
+		};
+		1AAB2D6420C4F6BE00F919E4 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				1AAB2D6120C4F69C00F919E4 /* MinimizeAnimator.h */,
+				1AAB2D6220C4F69C00F919E4 /* MinimizeAnimator.m */,
+				18D23ED820C3FD32003B2780 /* FullScreenAnimator.h */,
+				18D23ED920C3FD32003B2780 /* FullScreenAnimator.m */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		1AAB2D6520C4F6CB00F919E4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1AAB2D2120BCF79F00F919E4 /* ViewController.h */,
+				1AAB2D2220BCF79F00F919E4 /* ViewController.m */,
+				1AAB2D5020BCF7D300F919E4 /* RotateViewController.h */,
+				1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */,
+			);
+			path = ViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -368,6 +389,7 @@
 				18D23ECC20C3F1C5003B2780 /* UIActivityIndicatorView+Extension.m in Sources */,
 				1AAB2D5220BCF7D300F919E4 /* RotateViewController.m in Sources */,
 				18D23ECF20C3F1C5003B2780 /* UIDevice+Extension.m in Sources */,
+				1AAB2D6320C4F69C00F919E4 /* MinimizeAnimator.m in Sources */,
 				18D23EDA20C3FD32003B2780 /* FullScreenAnimator.m in Sources */,
 				18D23EB620C3C808003B2780 /* PlayerView.m in Sources */,
 				18D23ED220C3F1C5003B2780 /* NSObject+Extension.m in Sources */,

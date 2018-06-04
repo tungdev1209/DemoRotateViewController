@@ -11,9 +11,10 @@
 #import "UI+Extension.h"
 #import "Utilities.h"
 
-@interface RotateViewController ()
+@interface RotateViewController () <UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, assign) BOOL isDismissing;
+@property (nonatomic, assign) BOOL dismissing;
 
 @end
 
@@ -33,21 +34,14 @@
     [self.view addSubview:btn];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+-(BOOL)shouldAutorotate {
     
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        CGAffineTransform t = CGAffineTransformMakeRotation(-90 * M_PI / 180);
-//        t = CGAffineTransformConcat(t, CGAffineTransformMakeScale(180.0 / 375.0, 375.0 / 667.0));
-//        t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(-(667.0 - 180.0)/2.0, 0.0));
-//        self.playerView.transform = t;
-//    });
 }
 
 -(void)btnPressed:(UIButton *)btn {
     self.isDismissing = YES;
-    [self.parentVC setPlayerView:self.playerView];
     [self dismissViewControllerAnimated:YES completion:^{
+        [self.parentVC setPlayerView:self.playerView];
         self.isDismissing = NO;
     }];
 }

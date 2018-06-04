@@ -11,4 +11,8 @@
 
 @interface FullScreenAnimator : NSObject <UIViewControllerAnimatedTransitioning>
 
+@property (nonatomic, strong) CGSize(^getVideoSize)(void);
+@property (nonatomic, strong) void(^beginAnimation)(void);
+@property (nonatomic, assign) UIDeviceOrientation orientation;
+
 @end

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #define weakify(var) __weak typeof(var) weak_##var = var;
 #define strongify(var) \
@@ -19,5 +20,7 @@ _Pragma("clang diagnostic pop")
 #define MainHeight [UIScreen mainScreen].bounds.size.height
 
 @interface Utilities : NSObject
+
++(UIViewController *)topViewControllerWithRootViewController:(UIViewController *)rootVC;
 
 @end

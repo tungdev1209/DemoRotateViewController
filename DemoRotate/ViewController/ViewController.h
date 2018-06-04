@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PlayerView.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) PlayerView *playerView;
 

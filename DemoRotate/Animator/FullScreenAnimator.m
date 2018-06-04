@@ -8,6 +8,8 @@
 
 #import "FullScreenAnimator.h"
 #import "RotateViewController.h"
+#import "ViewController.h"
+#import "Utilities.h"
 
 @implementation FullScreenAnimator
 
@@ -17,25 +19,35 @@
     CGRect finalFrameForVC = [transitionContext finalFrameForViewController:toViewController];
     UIView *containerView = transitionContext.containerView;
     
-    toViewController.view.frame = CGRectMake(0, 0, 375, 180);
     [containerView addSubview:toViewController.view];
-//    toViewController.view.transform = CGAffineTransformMakeRotation(-90 * M_PI/180);
-//    toViewController.view.frame = CGRectMake(0, 0, 100, 60);
-//    [toViewController.view layoutIfNeeded];
+    toViewController.view.frame = finalFrameForVC;
     
-//    toViewController.view.transform = CGAffineTransformConcat(CGAffineTransformMakeScale(180.0 / 375.0, 375.0 / 667.0), CGAffineTransformMakeRotation(-90 * M_PI / 180));
+    CGFloat height = self.getVideoSize().height;
     
-    CGAffineTransform t = CGAffineTransformMakeRotation(-90 * M_PI / 180);
-    t = CGAffineTransformConcat(t, CGAffineTransformMakeScale(180.0 / 375.0, 375.0 / 667.0));
-    t = CGAffineTransformConcat(t, CGAffineTransformMakeTranslation(-(667.0-375.0)/2.0, 0.0));
+    CGAffineTransform rotate, scale, translate;
+    if (self.orientation == UIDeviceOrientationLandscapeLeft) {
+        rotate = CGAffineTransformMakeRotation(-90 * M_PI / 180);
+        scale = CGAffineTransformMakeScale(height / MainHeight, MainHeight / MainWidth);
+        translate = CGAffineTransformMakeTranslation(-(MainWidth - height) / 2.0, 0.0);
+    }
+    else {
+        rotate = CGAffineTransformMakeRotation(90 * M_PI / 180);
+        scale = CGAffineTransformMakeScale(height / MainHeight, MainHeight / MainWidth);
+        translate = CGAffineTransformMakeTranslation((MainWidth - height) / 2.0, 0.0);
+    }
+    
+    CGAffineTransform t = CGAffineTransformIdentity;
+    t = CGAffineTransformConcat(t, rotate);
+    t = CGAffineTransformConcat(t, scale);
+    t = CGAffineTransformConcat(t, translate);
+    
     toViewController.view.transform = t;
     
-//    [(RotateViewController *)toViewController beginPresentingAnimation];
+    self.beginAnimation();
     
     [UIView animateWithDuration:[self transitionDuration:transitionContext] animations:^{
         fromViewController.view.alpha = 0.5;
         toViewController.view.transform = CGAffineTransformIdentity;
-        toViewController.view.frame = finalFrameForVC;
     } completion:^(BOOL finished) {
         [transitionContext completeTransition:YES];
         fromViewController.view.alpha = 1.0;
@@ -43,7 +55,7 @@
 }
 
 -(NSTimeInterval)transitionDuration:(id<UIViewControllerContextTransitioning>)transitionContext {
-    return 10;
+    return 5;
 }
 
 @end

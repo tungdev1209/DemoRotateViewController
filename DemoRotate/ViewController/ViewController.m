@@ -14,14 +14,21 @@
 #import "Foundation+Extension.h"
 #import "Utilities.h"
 #import "FullScreenAnimator.h"
+#import "MinimizeAnimator.h"
 
 static const NSString *ItemStatusContext;
 
-@interface ViewController () <UIViewControllerTransitioningDelegate>
+@interface ViewController ()
 
 @property (nonatomic) AVPlayer *player;
 @property (nonatomic) AVPlayerItem *playerItem;
+@property (nonatomic, strong) UIView *playerContainerView;
 @property (nonatomic, strong) FullScreenAnimator *fullscreenAnimator;
+@property (nonatomic, strong) MinimizeAnimator *minimizeAnimator;
+@property (nonatomic, strong) RotateViewController *rotateVC;
+
+@property (nonatomic, assign) BOOL presenting;
+@property (nonatomic, assign) BOOL viewDidAppear;
 
 @end
 
@@ -31,14 +38,43 @@ static const NSString *ItemStatusContext;
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
+    self.playerContainerView = [[UIView alloc] init];
+    [self.view addSubview:self.playerContainerView];
+    [NSLayoutConstraint activateTop:0 forView:self.playerContainerView];
+    [NSLayoutConstraint activateRight:0 forView:self.playerContainerView];
+    [NSLayoutConstraint activateLeft:0 forView:self.playerContainerView];
+    
+    CGFloat height = MainWidth * MainWidth / MainHeight;
+    [NSLayoutConstraint activateConstraints:@[[NSLayoutConstraint constraintWithItem:self.playerContainerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:height]]];
+    
     self.playerView = [[PlayerView alloc] init];
     [self.playerView setBackgroundColor:[UIColor lightGrayColor]];
     
     [self loadVideo];
 }
 
+-(void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    self.viewDidAppear = NO;
+}
+
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    self.viewDidAppear = YES;
+}
+
+-(BOOL)shouldAutorotate {
+    if (!self.viewDidAppear || self.presenting) {
+        return NO;
+    }
+    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+        NSLog(@">>> lanscape");
+        self.presenting = YES;
+        [self presentFullScreenVCWithOrientation:[UIDevice currentDevice].orientation completion:^{
+            self.presenting = NO;
+        }];
+    }
+    return NO;
 }
 
 -(BOOL)prefersStatusBarHidden {
@@ -49,28 +85,24 @@ static const NSString *ItemStatusContext;
     _playerView = playerView;
     [_playerView setIsPresenting:YES];
     [self.view addSubview:_playerView];
-    [NSLayoutConstraint activateTop:0 forView:_playerView];
-    [NSLayoutConstraint activateRight:0 forView:_playerView];
-    [NSLayoutConstraint activateLeft:0 forView:_playerView];
     
-    CGFloat height = MainWidth * MainWidth / MainHeight;
-    [NSLayoutConstraint activateConstraints:@[[NSLayoutConstraint constraintWithItem:_playerView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:height]]];
+    [self.playerContainerView addSubview:_playerView];
+    [NSLayoutConstraint activateFullScreen:_playerView];
     
     weakify(self);
     [self.playerView setFullScreen:^{
         strongify(self);
-        [self presentFullScreenVC];
+        [self presentFullScreenVCWithOrientation:UIDeviceOrientationLandscapeLeft completion:nil];
     }];
 }
 
 #pragma mark - FullScreen function
--(void)presentFullScreenVC {
+-(void)presentFullScreenVCWithOrientation:(UIDeviceOrientation)orientation completion:(void(^)(void))completion {
     RotateViewController *vc = [[RotateViewController alloc] init];
     vc.parentVC = self;
-    [vc setPlayerView:self.playerView];
     vc.transitioningDelegate = self;
-//    vc.modalPresentationStyle = UIModalPresentationCustom;
-    [self presentViewController:vc animated:YES completion:nil];
+    self.rotateVC = vc;
+    [self presentViewController:vc animated:YES completion:completion];
 }
 
 #pragma mark UIViewControllerTransitioningDelegate
@@ -79,14 +111,36 @@ static const NSString *ItemStatusContext;
 }
 
 -(id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
-    return nil;
+    return self.minimizeAnimator;
 }
 
 -(FullScreenAnimator *)fullscreenAnimator {
     if (!_fullscreenAnimator) {
         _fullscreenAnimator = [[FullScreenAnimator alloc] init];
+        weakify(self);
+        _fullscreenAnimator.getVideoSize = ^CGSize{
+            strongify(self);
+            return self.playerContainerView.frame.size;
+        };
+        
+        _fullscreenAnimator.beginAnimation = ^{
+            strongify(self);
+            [self.rotateVC setPlayerView:self.playerView];
+        };
     }
     return _fullscreenAnimator;
+}
+
+-(MinimizeAnimator *)minimizeAnimator {
+    if (!_minimizeAnimator) {
+        _minimizeAnimator = [[MinimizeAnimator alloc] init];
+        weakify(self);
+        _minimizeAnimator.getVideoSize = ^CGSize{
+            strongify(self);
+            return self.playerContainerView.frame.size;
+        };
+    }
+    return _minimizeAnimator;
 }
 
 -(void)loadVideo {
