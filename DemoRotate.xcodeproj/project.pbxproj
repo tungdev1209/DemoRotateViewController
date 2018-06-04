@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18D23EB620C3C808003B2780 /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EB420C3C807003B2780 /* PlayerView.m */; };
+		18D23ECC20C3F1C5003B2780 /* UIActivityIndicatorView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EB920C3F1C5003B2780 /* UIActivityIndicatorView+Extension.m */; };
+		18D23ECD20C3F1C5003B2780 /* UITableView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EBE20C3F1C5003B2780 /* UITableView+Extension.m */; };
+		18D23ECE20C3F1C5003B2780 /* UIColor+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EC020C3F1C5003B2780 /* UIColor+Extension.m */; };
+		18D23ECF20C3F1C5003B2780 /* UIDevice+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EC120C3F1C5003B2780 /* UIDevice+Extension.m */; };
+		18D23ED020C3F1C5003B2780 /* UIButton+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EC220C3F1C5003B2780 /* UIButton+Extension.m */; };
+		18D23ED120C3F1C5003B2780 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23EC320C3F1C5003B2780 /* UIView+Extension.m */; };
+		18D23ED220C3F1C5003B2780 /* NSObject+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23ECA20C3F1C5003B2780 /* NSObject+Extension.m */; };
+		18D23ED320C3F1C5003B2780 /* NSLayoutConstraint+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23ECB20C3F1C5003B2780 /* NSLayoutConstraint+Extension.m */; };
+		18D23ED620C3FA9C003B2780 /* Utilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23ED520C3FA9C003B2780 /* Utilities.m */; };
+		18D23EDA20C3FD32003B2780 /* FullScreenAnimator.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D23ED920C3FD32003B2780 /* FullScreenAnimator.m */; };
 		1AAB2D2020BCF79F00F919E4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D1F20BCF79F00F919E4 /* AppDelegate.m */; };
 		1AAB2D2320BCF79F00F919E4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1AAB2D2220BCF79F00F919E4 /* ViewController.m */; };
 		1AAB2D2620BCF79F00F919E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1AAB2D2420BCF79F00F919E4 /* Main.storyboard */; };
@@ -36,6 +47,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		18D23EB420C3C807003B2780 /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
+		18D23EB520C3C807003B2780 /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
+		18D23EB920C3F1C5003B2780 /* UIActivityIndicatorView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIActivityIndicatorView+Extension.m"; sourceTree = "<group>"; };
+		18D23EBA20C3F1C5003B2780 /* UIColor+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Extension.h"; sourceTree = "<group>"; };
+		18D23EBB20C3F1C5003B2780 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		18D23EBC20C3F1C5003B2780 /* UIButton+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+Extension.h"; sourceTree = "<group>"; };
+		18D23EBD20C3F1C5003B2780 /* UIDevice+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+Extension.h"; sourceTree = "<group>"; };
+		18D23EBE20C3F1C5003B2780 /* UITableView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+Extension.m"; sourceTree = "<group>"; };
+		18D23EBF20C3F1C5003B2780 /* UIActivityIndicatorView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIActivityIndicatorView+Extension.h"; sourceTree = "<group>"; };
+		18D23EC020C3F1C5003B2780 /* UIColor+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Extension.m"; sourceTree = "<group>"; };
+		18D23EC120C3F1C5003B2780 /* UIDevice+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+Extension.m"; sourceTree = "<group>"; };
+		18D23EC220C3F1C5003B2780 /* UIButton+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Extension.m"; sourceTree = "<group>"; };
+		18D23EC320C3F1C5003B2780 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		18D23EC420C3F1C5003B2780 /* UI+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UI+Extension.h"; sourceTree = "<group>"; };
+		18D23EC520C3F1C5003B2780 /* UITableView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+Extension.h"; sourceTree = "<group>"; };
+		18D23EC720C3F1C5003B2780 /* NSLayoutConstraint+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Extension.h"; sourceTree = "<group>"; };
+		18D23EC820C3F1C5003B2780 /* NSObject+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Extension.h"; sourceTree = "<group>"; };
+		18D23EC920C3F1C5003B2780 /* Foundation+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Foundation+Extension.h"; sourceTree = "<group>"; };
+		18D23ECA20C3F1C5003B2780 /* NSObject+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Extension.m"; sourceTree = "<group>"; };
+		18D23ECB20C3F1C5003B2780 /* NSLayoutConstraint+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Extension.m"; sourceTree = "<group>"; };
+		18D23ED420C3FA9C003B2780 /* Utilities.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utilities.h; sourceTree = "<group>"; };
+		18D23ED520C3FA9C003B2780 /* Utilities.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utilities.m; sourceTree = "<group>"; };
+		18D23ED820C3FD32003B2780 /* FullScreenAnimator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FullScreenAnimator.h; sourceTree = "<group>"; };
+		18D23ED920C3FD32003B2780 /* FullScreenAnimator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FullScreenAnimator.m; sourceTree = "<group>"; };
 		1AAB2D1B20BCF79F00F919E4 /* DemoRotate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoRotate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AAB2D1E20BCF79F00F919E4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1AAB2D1F20BCF79F00F919E4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -81,6 +116,56 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18D23EB720C3F1C5003B2780 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				18D23EB820C3F1C5003B2780 /* UI */,
+				18D23EC620C3F1C5003B2780 /* Foundation */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		18D23EB820C3F1C5003B2780 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				18D23EB920C3F1C5003B2780 /* UIActivityIndicatorView+Extension.m */,
+				18D23EBA20C3F1C5003B2780 /* UIColor+Extension.h */,
+				18D23EBB20C3F1C5003B2780 /* UIView+Extension.h */,
+				18D23EBC20C3F1C5003B2780 /* UIButton+Extension.h */,
+				18D23EBD20C3F1C5003B2780 /* UIDevice+Extension.h */,
+				18D23EBE20C3F1C5003B2780 /* UITableView+Extension.m */,
+				18D23EBF20C3F1C5003B2780 /* UIActivityIndicatorView+Extension.h */,
+				18D23EC020C3F1C5003B2780 /* UIColor+Extension.m */,
+				18D23EC120C3F1C5003B2780 /* UIDevice+Extension.m */,
+				18D23EC220C3F1C5003B2780 /* UIButton+Extension.m */,
+				18D23EC320C3F1C5003B2780 /* UIView+Extension.m */,
+				18D23EC420C3F1C5003B2780 /* UI+Extension.h */,
+				18D23EC520C3F1C5003B2780 /* UITableView+Extension.h */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		18D23EC620C3F1C5003B2780 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+				18D23EC720C3F1C5003B2780 /* NSLayoutConstraint+Extension.h */,
+				18D23EC820C3F1C5003B2780 /* NSObject+Extension.h */,
+				18D23EC920C3F1C5003B2780 /* Foundation+Extension.h */,
+				18D23ECA20C3F1C5003B2780 /* NSObject+Extension.m */,
+				18D23ECB20C3F1C5003B2780 /* NSLayoutConstraint+Extension.m */,
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		18D23ED720C3FAA2003B2780 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				18D23ED420C3FA9C003B2780 /* Utilities.h */,
+				18D23ED520C3FA9C003B2780 /* Utilities.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		1AAB2D1220BCF79F00F919E4 = {
 			isa = PBXGroup;
 			children = (
@@ -104,12 +189,18 @@
 		1AAB2D1D20BCF79F00F919E4 /* DemoRotate */ = {
 			isa = PBXGroup;
 			children = (
+				18D23ED720C3FAA2003B2780 /* Utils */,
+				18D23EB720C3F1C5003B2780 /* Extensions */,
 				1AAB2D1E20BCF79F00F919E4 /* AppDelegate.h */,
 				1AAB2D1F20BCF79F00F919E4 /* AppDelegate.m */,
 				1AAB2D2120BCF79F00F919E4 /* ViewController.h */,
 				1AAB2D2220BCF79F00F919E4 /* ViewController.m */,
+				18D23ED820C3FD32003B2780 /* FullScreenAnimator.h */,
+				18D23ED920C3FD32003B2780 /* FullScreenAnimator.m */,
 				1AAB2D5020BCF7D300F919E4 /* RotateViewController.h */,
 				1AAB2D5120BCF7D300F919E4 /* RotateViewController.m */,
+				18D23EB520C3C807003B2780 /* PlayerView.h */,
+				18D23EB420C3C807003B2780 /* PlayerView.m */,
 				1AAB2D2420BCF79F00F919E4 /* Main.storyboard */,
 				1AAB2D2720BCF7A100F919E4 /* Assets.xcassets */,
 				1AAB2D2920BCF7A100F919E4 /* LaunchScreen.storyboard */,
@@ -268,9 +359,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AAB2D2320BCF79F00F919E4 /* ViewController.m in Sources */,
+				18D23ECD20C3F1C5003B2780 /* UITableView+Extension.m in Sources */,
+				18D23ED120C3F1C5003B2780 /* UIView+Extension.m in Sources */,
 				1AAB2D2E20BCF7A100F919E4 /* main.m in Sources */,
+				18D23ECE20C3F1C5003B2780 /* UIColor+Extension.m in Sources */,
 				1AAB2D2020BCF79F00F919E4 /* AppDelegate.m in Sources */,
+				18D23ED020C3F1C5003B2780 /* UIButton+Extension.m in Sources */,
+				18D23ECC20C3F1C5003B2780 /* UIActivityIndicatorView+Extension.m in Sources */,
 				1AAB2D5220BCF7D300F919E4 /* RotateViewController.m in Sources */,
+				18D23ECF20C3F1C5003B2780 /* UIDevice+Extension.m in Sources */,
+				18D23EDA20C3FD32003B2780 /* FullScreenAnimator.m in Sources */,
+				18D23EB620C3C808003B2780 /* PlayerView.m in Sources */,
+				18D23ED220C3F1C5003B2780 /* NSObject+Extension.m in Sources */,
+				18D23ED620C3FA9C003B2780 /* Utilities.m in Sources */,
+				18D23ED320C3F1C5003B2780 /* NSLayoutConstraint+Extension.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

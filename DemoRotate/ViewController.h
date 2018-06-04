@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlayerView.h"
 
 @interface ViewController : UIViewController
 
+@property (nonatomic, strong) PlayerView *playerView;
 
 @end
 
