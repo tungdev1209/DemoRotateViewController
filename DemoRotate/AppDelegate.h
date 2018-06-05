@@ -12,6 +12,7 @@
 @optional
 -(BOOL)willDismiss;
 -(BOOL)willPresent;
+-(BOOL)viewAppearing;
 @end
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>

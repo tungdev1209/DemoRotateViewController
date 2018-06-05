@@ -26,7 +26,6 @@
     
     self.view.backgroundColor = [UIColor blueColor];
     
-    self.view.backgroundColor = [UIColor lightGrayColor];
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
     [btn setTitle:@"Dismiss" forState:UIControlStateNormal];
     [btn setFrame:CGRectMake(100, 100, 200, 60)];

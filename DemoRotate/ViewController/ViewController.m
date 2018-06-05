@@ -16,19 +16,20 @@
 #import "FullScreenAnimator.h"
 #import "MinimizeAnimator.h"
 
-static const NSString *ItemStatusContext;
+#import <CoreMotion/CoreMotion.h>
+#define kUpdateInterval (1.0f / 10.0f)
 
 @interface ViewController ()
 
-@property (nonatomic) AVPlayer *player;
-@property (nonatomic) AVPlayerItem *playerItem;
 @property (nonatomic, strong) UIView *playerContainerView;
 @property (nonatomic, strong) FullScreenAnimator *fullscreenAnimator;
 @property (nonatomic, strong) MinimizeAnimator *minimizeAnimator;
 @property (nonatomic, strong) RotateViewController *rotateVC;
 
 @property (nonatomic, assign) BOOL presenting;
-@property (nonatomic, assign) BOOL viewDidAppear;
+
+@property (nonatomic, strong) CMMotionManager *motionManager;
+@property (nonatomic, strong) NSOperationQueue *queue;
 
 @end
 
@@ -37,6 +38,16 @@ static const NSString *ItemStatusContext;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    NSLog(@"viewDidLoad");
+    self.motionManager = [[CMMotionManager alloc]  init];
+    self.queue = [[NSOperationQueue alloc] init];
+    self.motionManager.accelerometerUpdateInterval = kUpdateInterval;
+    [self.motionManager startAccelerometerUpdatesToQueue:self.queue withHandler:
+     ^(CMAccelerometerData *accelerometerData, NSError *error) {
+         CMAcceleration ace = accelerometerData.acceleration;
+         NSLog(@"x = %.2f, y = %.2f, z = %.2f", ace.x, ace.y, ace.z);
+     }];
     
     self.playerContainerView = [[UIView alloc] init];
     [self.view addSubview:self.playerContainerView];
@@ -50,32 +61,36 @@ static const NSString *ItemStatusContext;
     self.playerView = [[PlayerView alloc] init];
     [self.playerView setBackgroundColor:[UIColor lightGrayColor]];
     
-    [self loadVideo];
+//    [self.playerView loadVideo];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    self.viewDidAppear = NO;
+    NSLog(@"viewWillDisappear");
 }
 
 -(void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    self.viewDidAppear = YES;
+    NSLog(@"viewDidAppear");
 }
 
--(BOOL)shouldAutorotate {
-    if (!self.viewDidAppear || self.presenting) {
-        return NO;
-    }
-    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
-        NSLog(@">>> lanscape");
-        self.presenting = YES;
-        [self presentFullScreenVCWithOrientation:[UIDevice currentDevice].orientation completion:^{
-            self.presenting = NO;
-        }];
-    }
-    return NO;
-}
+//-(BOOL)shouldAutorotate {
+//    NSLog(@"shouldAutorotate");
+////    if (self.presenting || !self.videoLoaded) {
+////        return NO;
+////    }
+//    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
+//        NSLog(@">>> landscape");
+////        self.presenting = YES;
+////        [self presentFullScreenVCWithOrientation:[UIDevice currentDevice].orientation completion:^{
+////            self.presenting = NO;
+////        }];
+//    }
+//    else {
+//        NSLog(@">>> portrait");
+//    }
+//    return NO;
+//}
 
 -(BOOL)prefersStatusBarHidden {
     return YES;
@@ -144,72 +159,9 @@ static const NSString *ItemStatusContext;
     return _minimizeAnimator;
 }
 
--(void)loadVideo {
-    if (self.playerItem) {
-        [self.playerItem removeObserver:self forKeyPath:@"status" context:&ItemStatusContext];
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:AVPlayerItemDidPlayToEndTimeNotification object:self.playerItem];
-        self.playerItem = nil;
-    }
-    
-    NSURL *url = [NSURL URLWithString:@"http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8"];
-    
-    AVURLAsset *asset = [AVURLAsset URLAssetWithURL:url options:nil];
-    NSString *tracksKey = @"tracks";
-    
-    [asset loadValuesAsynchronouslyForKeys:@[tracksKey] completionHandler:
-     ^{
-         // The completion block goes here.
-         dispatch_async(dispatch_get_main_queue(), ^{
-             NSError *error;
-             AVKeyValueStatus status = [asset statusOfValueForKey:tracksKey error:&error];
-             
-             if (status == AVKeyValueStatusLoaded) {
-                 self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
-                 // ensure that this is done before the playerItem is associated with the player
-                 [self.playerItem addObserver:self forKeyPath:@"status"
-                                      options:NSKeyValueObservingOptionInitial context:&ItemStatusContext];
-                 [[NSNotificationCenter defaultCenter] addObserver:self
-                                                          selector:@selector(playerItemDidReachEnd:)
-                                                              name:AVPlayerItemDidPlayToEndTimeNotification
-                                                            object:self.playerItem];
-                 self.player = [AVPlayer playerWithPlayerItem:self.playerItem];
-                 [self.playerView setPlayer:self.player];
-             }
-             else {
-                 // You should deal with the error appropriately.
-                 NSLog(@"The asset's tracks were not loaded:\n%@", [error localizedDescription]);
-             }
-         });
-     }];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object
-                        change:(NSDictionary *)change context:(void *)context {
-    
-    if (context == &ItemStatusContext && [keyPath isEqualToString:@"status"]) {
-        if (self.playerItem.status == AVPlayerStatusReadyToPlay) {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                [self.player play];
-            });
-        }
-        return;
-    }
-    [super observeValueForKeyPath:keyPath ofObject:object
-                           change:change context:context];
-}
-
-- (void)playerItemDidReachEnd:(NSNotification *)notification {
-    [self.player seekToTime:kCMTimeZero];
-}
-
 - (IBAction)presentPressed:(id)sender {
     RotateViewController *vc = [[RotateViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
 }
-
--(void)dealloc {
-    [self.playerItem removeObserver:self forKeyPath:@"status" context:&ItemStatusContext];
-}
-
 
 @end

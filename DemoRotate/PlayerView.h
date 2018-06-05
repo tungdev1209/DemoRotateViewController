@@ -17,4 +17,6 @@
 @property (nonatomic, strong) void(^minimizeScreen)(void);
 @property (nonatomic, assign) BOOL isPresenting;
 
+-(void)loadVideo;
+
 @end
