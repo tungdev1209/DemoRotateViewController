@@ -18,6 +18,7 @@ _Pragma("clang diagnostic pop")
 
 #define MainWidth [UIScreen mainScreen].bounds.size.width
 #define MainHeight [UIScreen mainScreen].bounds.size.height
+#define MainOrientation [UIDevice currentDevice].orientation
 
 @interface Utilities : NSObject
 

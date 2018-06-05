@@ -52,15 +52,15 @@
 -(UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
     UIViewController *rootVC = [Utilities topViewControllerWithRootViewController:window.rootViewController];
     if ([rootVC conformsToProtocol:@protocol(ScreenPresentingProtocol)]) {
-        id<ScreenPresentingProtocol> vcAppliedProtocol = (id<ScreenPresentingProtocol>)rootVC;
-        if ([vcAppliedProtocol willDismiss]) {
-            return UIInterfaceOrientationMaskAll;
-        }
-        else if ([vcAppliedProtocol willPresent]) {
-            return UIInterfaceOrientationMaskLandscape;
-        }
+//        id<ScreenPresentingProtocol> vcAppliedProtocol = (id<ScreenPresentingProtocol>)rootVC;
+//        if ([vcAppliedProtocol willDismiss]) {
+//            return UIInterfaceOrientationMaskAll;
+//        }
+//        else if ([vcAppliedProtocol willPresent]) {
+//            return UIInterfaceOrientationMaskLandscape;
+//        }
     }
-    return UIInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationMaskAllButUpsideDown;
 }
 
 @end

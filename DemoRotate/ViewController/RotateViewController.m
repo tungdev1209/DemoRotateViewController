@@ -35,10 +35,21 @@
 }
 
 -(BOOL)shouldAutorotate {
-    
+    if (MainOrientation == UIDeviceOrientationPortraitUpsideDown) {
+        return NO;
+    }
+    if (UIDeviceOrientationIsLandscape(MainOrientation)) {
+        return YES;
+    }
+    [self dismiss];
+    return NO;
 }
 
 -(void)btnPressed:(UIButton *)btn {
+    [self dismiss];
+}
+
+-(void)dismiss {
     self.isDismissing = YES;
     [self dismissViewControllerAnimated:YES completion:^{
         [self.parentVC setPlayerView:self.playerView];

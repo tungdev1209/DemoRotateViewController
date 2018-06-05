@@ -102,6 +102,7 @@ static const NSString *ItemStatusContext;
     vc.parentVC = self;
     vc.transitioningDelegate = self;
     self.rotateVC = vc;
+    self.fullscreenAnimator.orientation = orientation;
     [self presentViewController:vc animated:YES completion:completion];
 }
 
