@@ -79,7 +79,7 @@
             return UIInterfaceOrientationMaskLandscape;
         }
     }
-    return UIInterfaceOrientationMaskAll;
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 @end

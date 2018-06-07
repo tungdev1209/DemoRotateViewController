@@ -20,8 +20,13 @@ _Pragma("clang diagnostic pop")
 #define MainHeight [UIScreen mainScreen].bounds.size.height
 #define MainOrientation [UIDevice currentDevice].orientation
 
+#define isPortrait UIDeviceOrientationIsPortrait([[UIDevice currentDevice] orientation])
+#define isLandscape UIDeviceOrientationIsLandscape([[UIDevice currentDevice] orientation])
+
 @interface Utilities : NSObject
 
 +(UIViewController *)topViewControllerWithRootViewController:(UIViewController *)rootVC;
++(CGFloat)widthPortrait;
++(CGFloat)heightPortrait;
 
 @end

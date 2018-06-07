@@ -31,17 +31,14 @@
     [btn setFrame:CGRectMake(100, 100, 200, 60)];
     [btn addTarget:self action:@selector(btnPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:btn];
-}
-
--(BOOL)shouldAutorotate {
-    if (MainOrientation == UIDeviceOrientationPortraitUpsideDown) {
-        return NO;
-    }
-    if (UIDeviceOrientationIsLandscape(MainOrientation)) {
-        return YES;
-    }
-    [self dismiss];
-    return NO;
+    
+    weakify(self);
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        strongify(self);
+        if (isPortrait) {
+            [self dismiss];
+        }
+    }];
 }
 
 -(void)btnPressed:(UIButton *)btn {
@@ -79,6 +76,10 @@
 
 -(BOOL)willPresent {
     return !self.isDismissing;
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

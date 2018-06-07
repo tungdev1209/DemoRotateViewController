@@ -16,9 +16,6 @@
 #import "FullScreenAnimator.h"
 #import "MinimizeAnimator.h"
 
-#import <CoreMotion/CoreMotion.h>
-#define kUpdateInterval (1.0f / 10.0f)
-
 @interface ViewController ()
 
 @property (nonatomic, strong) UIView *playerContainerView;
@@ -28,9 +25,6 @@
 
 @property (nonatomic, assign) BOOL presenting;
 
-@property (nonatomic, strong) CMMotionManager *motionManager;
-@property (nonatomic, strong) NSOperationQueue *queue;
-
 @end
 
 @implementation ViewController
@@ -38,16 +32,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    NSLog(@"viewDidLoad");
-    self.motionManager = [[CMMotionManager alloc]  init];
-    self.queue = [[NSOperationQueue alloc] init];
-    self.motionManager.accelerometerUpdateInterval = kUpdateInterval;
-    [self.motionManager startAccelerometerUpdatesToQueue:self.queue withHandler:
-     ^(CMAccelerometerData *accelerometerData, NSError *error) {
-         CMAcceleration ace = accelerometerData.acceleration;
-         NSLog(@"x = %.2f, y = %.2f, z = %.2f", ace.x, ace.y, ace.z);
-     }];
     
     self.playerContainerView = [[UIView alloc] init];
     [self.view addSubview:self.playerContainerView];
@@ -61,7 +45,15 @@
     self.playerView = [[PlayerView alloc] init];
     [self.playerView setBackgroundColor:[UIColor lightGrayColor]];
     
-//    [self.playerView loadVideo];
+    [self.playerView loadVideo];
+    
+    weakify(self);
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIDeviceOrientationDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification * _Nonnull note) {
+        strongify(self);
+        if (isLandscape) {
+            [self presentFullScreenVCWithOrientation:MainOrientation completion:nil];
+        }
+    }];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -74,23 +66,11 @@
     NSLog(@"viewDidAppear");
 }
 
-//-(BOOL)shouldAutorotate {
-//    NSLog(@"shouldAutorotate");
-////    if (self.presenting || !self.videoLoaded) {
-////        return NO;
-////    }
-//    if (UIDeviceOrientationIsLandscape([UIDevice currentDevice].orientation)) {
-//        NSLog(@">>> landscape");
-////        self.presenting = YES;
-////        [self presentFullScreenVCWithOrientation:[UIDevice currentDevice].orientation completion:^{
-////            self.presenting = NO;
-////        }];
-//    }
-//    else {
-//        NSLog(@">>> portrait");
-//    }
-//    return NO;
-//}
+-(void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    if (size.width > size.height) {
+        NSLog(@"viewWillTransitionToSize");
+    }
+}
 
 -(BOOL)prefersStatusBarHidden {
     return YES;
@@ -162,6 +142,10 @@
 - (IBAction)presentPressed:(id)sender {
     RotateViewController *vc = [[RotateViewController alloc] init];
     [self presentViewController:vc animated:YES completion:nil];
+}
+
+-(void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

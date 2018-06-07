@@ -26,4 +26,12 @@
     return rootVC;
 }
 
++(CGFloat)widthPortrait {
+    return MainWidth > MainHeight ? MainHeight : MainWidth;
+}
+
++(CGFloat)heightPortrait {
+    return MainWidth > MainHeight ? MainWidth : MainHeight;
+}
+
 @end
